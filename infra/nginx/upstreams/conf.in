@@ -1,0 +1,3 @@
+upstream sock-@group@-@team@ {
+  server unix:/srv/hr/run/@group@/@team@.sock;
+}

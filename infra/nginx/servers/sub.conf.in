@@ -1,0 +1,20 @@
+server {
+  listen 443 ssl;
+  server_name @team@.@group@.hr.dmerej.info;
+  ssl_certificate /etc/letsencrypt/live/@team@.@group@.hr.dmerej.info/fullchain.pem;
+  ssl_certificate_key /etc/letsencrypt/live/@team@.@group@.hr.dmerej.info/privkey.pem;
+
+  location /static {
+    root /srv/hr/src/@group@ ;
+  }
+
+  location / {
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-Proto $scheme;
+    proxy_set_header Host $http_host;
+    proxy_redirect off;
+    proxy_pass http://sock-@group@-@team@;
+  }
+
+
+}
